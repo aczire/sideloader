@@ -1,0 +1,129 @@
+Disassembly:
+0:  50                      push   rax
+1:  53                      push   rbx
+2:  51                      push   rcx
+3:  52                      push   rdx
+4:  55                      push   rbp
+5:  57                      push   rdi
+6:  56                      push   rsi
+7:  41 50                   push   r8
+9:  41 51                   push   r9
+b:  41 52                   push   r10
+d:  41 53                   push   r11
+f:  41 54                   push   r12
+11: 41 55                   push   r13
+13: 41 56                   push   r14
+15: 41 57                   push   r15
+17: fc                      cld
+18: 48 83 e4 f0             and    rsp,0xfffffffffffffff0
+1c: e8 c0 00 00 00          call   0xe1
+21: 41 51                   push   r9
+23: 41 50                   push   r8
+25: 52                      push   rdx
+26: 51                      push   rcx
+27: 56                      push   rsi
+28: 48 31 d2                xor    rdx,rdx
+2b: 65 48 8b 52 60          mov    rdx,QWORD PTR gs:[rdx+0x60]
+30: 48 8b 52 18             mov    rdx,QWORD PTR [rdx+0x18]
+34: 48 8b 52 20             mov    rdx,QWORD PTR [rdx+0x20]
+38: 48 8b 72 50             mov    rsi,QWORD PTR [rdx+0x50]
+3c: 48 0f b7 4a 4a          movzx  rcx,WORD PTR [rdx+0x4a]
+41: 4d 31 c9                xor    r9,r9
+44: 48 31 c0                xor    rax,rax
+47: ac                      lods   al,BYTE PTR ds:[rsi]
+48: 3c 61                   cmp    al,0x61
+4a: 7c 02                   jl     0x4e
+4c: 2c 20                   sub    al,0x20
+4e: 41 c1 c9 0d             ror    r9d,0xd
+52: 41 01 c1                add    r9d,eax
+55: e2 ed                   loop   0x44
+57: 52                      push   rdx
+58: 41 51                   push   r9
+5a: 48 8b 52 20             mov    rdx,QWORD PTR [rdx+0x20]
+5e: 8b 42 3c                mov    eax,DWORD PTR [rdx+0x3c]
+61: 48 01 d0                add    rax,rdx
+64: 8b 80 88 00 00 00       mov    eax,DWORD PTR [rax+0x88]
+6a: 48 85 c0                test   rax,rax
+6d: 74 67                   je     0xd6
+6f: 48 01 d0                add    rax,rdx
+72: 50                      push   rax
+73: 8b 48 18                mov    ecx,DWORD PTR [rax+0x18]
+76: 44 8b 40 20             mov    r8d,DWORD PTR [rax+0x20]
+7a: 49 01 d0                add    r8,rdx
+7d: e3 56                   jrcxz  0xd5
+7f: 48 ff c9                dec    rcx
+82: 41 8b 34 88             mov    esi,DWORD PTR [r8+rcx*4]
+86: 48 01 d6                add    rsi,rdx
+89: 4d 31 c9                xor    r9,r9
+8c: 48 31 c0                xor    rax,rax
+8f: ac                      lods   al,BYTE PTR ds:[rsi]
+90: 41 c1 c9 0d             ror    r9d,0xd
+94: 41 01 c1                add    r9d,eax
+97: 38 e0                   cmp    al,ah
+99: 75 f1                   jne    0x8c
+9b: 4c 03 4c 24 08          add    r9,QWORD PTR [rsp+0x8]
+a0: 45 39 d1                cmp    r9d,r10d
+a3: 75 d8                   jne    0x7d
+a5: 58                      pop    rax
+a6: 44 8b 40 24             mov    r8d,DWORD PTR [rax+0x24]
+aa: 49 01 d0                add    r8,rdx
+ad: 66 41 8b 0c 48          mov    cx,WORD PTR [r8+rcx*2]
+b2: 44 8b 40 1c             mov    r8d,DWORD PTR [rax+0x1c]
+b6: 49 01 d0                add    r8,rdx
+b9: 41 8b 04 88             mov    eax,DWORD PTR [r8+rcx*4]
+bd: 48 01 d0                add    rax,rdx
+c0: 41 58                   pop    r8
+c2: 41 58                   pop    r8
+c4: 5e                      pop    rsi
+c5: 59                      pop    rcx
+c6: 5a                      pop    rdx
+c7: 41 58                   pop    r8
+c9: 41 59                   pop    r9
+cb: 41 5a                   pop    r10
+cd: 48 83 ec 20             sub    rsp,0x20
+d1: 41 52                   push   r10
+d3: ff e0                   jmp    rax
+d5: 58                      pop    rax
+d6: 41 59                   pop    r9
+d8: 5a                      pop    rdx
+d9: 48 8b 12                mov    rdx,QWORD PTR [rdx]
+dc: e9 57 ff ff ff          jmp    0x38
+e1: 5d                      pop    rbp
+e2: 48 ba 01 00 00 00 00    movabs rdx,0x1
+e9: 00 00 00
+ec: 48 8d 8d 06 01 00 00    lea    rcx,[rbp+0x106]
+f3: 41 ba 31 8b 6f 87       mov    r10d,0x876f8b31
+f9: ff d5                   call   rbp
+fb: bb aa c5 e2 5d          mov    ebx,0x5de2c5aa
+100:    41 ba a6 95 bd 9d       mov    r10d,0x9dbd95a6
+106:    ff d5                   call   rbp
+108:    48 83 c4 28             add    rsp,0x28
+10c:    3c 06                   cmp    al,0x6
+10e:    7c 0a                   jl     0x11a
+110:    80 fb e0                cmp    bl,0xe0
+113:    75 05                   jne    0x11a
+115:    bb 47 13 72 6f          mov    ebx,0x6f721347
+11a:    6a 00                   push   0x0
+11c:    59                      pop    rcx
+11d:    41 89 da                mov    r10d,ebx
+120:    ff d5                   call   rbp
+122:    e8 05 00 00 00          call   0x12c
+127:    63 61 6c                movsxd esp,DWORD PTR [rcx+0x6c]
+12a:    63 00                   movsxd eax,DWORD PTR [rax]
+12c:    48 83 c4 40             add    rsp,0x40
+130:    41 5f                   pop    r15
+132:    41 5e                   pop    r14
+134:    41 5d                   pop    r13
+136:    41 5c                   pop    r12
+138:    41 5b                   pop    r11
+13a:    41 5a                   pop    r10
+13c:    41 59                   pop    r9
+13e:    41 58                   pop    r8
+140:    5e                      pop    rsi
+141:    5f                      pop    rdi
+142:    5d                      pop    rbp
+143:    5a                      pop    rdx
+144:    59                      pop    rcx
+145:    5b                      pop    rbx
+146:    58                      pop    rax
+147:    ff 24 24                jmp    QWORD PTR [rsp]
